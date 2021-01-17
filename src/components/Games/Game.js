@@ -1,35 +1,34 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect,useCallback} from 'react';
 import styles from "./Games.module.css";
 
 import {
-    useParams,
-    useHistory
+    useParams
   } from "react-router-dom";
 
 const Game = () => {
     const params = useParams();
-    const history = useHistory();
     const [loading,setLoading] = useState(false);
     const [game,setGame] = useState({});
     const baseAPIUrl = 'https://api.dev.cloud.barbooksaustralia.com/code-challenge';
 
-    useEffect(() => {
-        getGame();
-      }, []);
+    const getGame = useCallback(() => {
+      setLoading(true);
+      let apiUrl = `/api/game?id=${params.id}`;
 
-      const getGame = () => {
-        setLoading(true);
-        let apiUrl = `/api/game?id=${params.id}`;
-  
-        let requestOptions = {
-            method: 'GET',
-            redirect: 'follow'
-          };
-          fetch(apiUrl, requestOptions)
-            .then(response => response.json())
-            .then(response => {setGame(response); setLoading(false)})
-            .catch(error => {console.log('error', error); setLoading(false)});
-       }
+      let requestOptions = {
+          method: 'GET',
+          redirect: 'follow'
+        };
+        fetch(apiUrl, requestOptions)
+          .then(response => response.json())
+          .then(response => {setGame(response); setLoading(false)})
+          .catch(error => {console.log('error', error); setLoading(false)});
+      }, [params]);
+
+
+      useEffect(() => {
+        getGame();
+      }, [getGame]);
 
     if (loading){
       return (<div style={{textAlign:"center"}}>Loading...</div>)
@@ -43,8 +42,8 @@ const Game = () => {
           </div>
           <div className={styles.Col7}>
             <div className={styles.Row} >
-                <div className={styles.Col4}><b>Requirements</b></div>
-                <div className={styles.Col6}><b>{game.title}</b></div>
+                <div className={styles.Col4}><b>Requirements</b><hr /></div>
+                <div className={styles.Col6}><b>{game.title} </b></div>
             </div>
 
             <div className={styles.Row} >
@@ -56,6 +55,7 @@ const Game = () => {
                   <nobr><b>{key.toUpperCase()}</b>:</nobr> {value}
                 </div>)}
                 ):""}  
+                <hr />
 
                 {game.status && <div className={`${styles.Row}`} style={{justifyContent:"left", padding:"5px"}}>
                 <b>STATUS: </b> {game.status}
@@ -91,9 +91,8 @@ const Game = () => {
                 <div className={`${styles.Row}`} style={{justifyContent:"left", padding:"5px"}}>
                   {game.description}
                 </div>
-                  <a className={styles.Link} style={{float:"right", fontWeight:"bold"}} href="#"
-                  onClick={() => { history.goBack();}}>  {`< Back`}
-                  </a>
+                 
+                 <a className={styles.Link} style={{float:"right", fontWeight:"bold"}} href="/">  {`< Back`}</a>
                 </div>
             </div>
           </div>
@@ -102,7 +101,7 @@ const Game = () => {
          <div className={styles.Row}>
            {game.screenshots?.map((screenshot) =>
             <div className={`${styles.Col3}`} style={{padding:"5px"}}> 
-               <img className={styles.Thumbnail} src={baseAPIUrl+screenshot.image} /> 
+               <img className={styles.Thumbnail} src={baseAPIUrl+screenshot.image} alt={game.title} /> 
             </div>)}
          </div>
     </div>
