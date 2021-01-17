@@ -1,0 +1,81 @@
+.SearchInputText {
+  background-color: white;
+   background-image: url('../../searchicon.png');
+  background-position: 10px 10px; 
+  background-size: 30px;
+  background-repeat: no-repeat;
+  padding-left: 50px;
+  height: 50px;
+  width: 500px;
+  font-size: 18px;
+  margin-bottom: 50px;
+}
+
+
+.Row{
+    display:flex;
+    flex:1 0 100%;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+.Col2{
+  flex:0 0 auto;
+  width:16.66666%;
+}
+.Col3{
+  flex:0 0 auto;
+  width:25%;
+}
+
+.Col4{
+  flex:0 0 auto;
+  width:33.3333%;
+}
+
+.Col5{
+  flex:0 0 auto;
+  width:41.6666%;
+}
+
+.Col6{
+  flex:0 0 auto;
+  width:50%;
+}
+
+.Col7{
+  flex:0 0 auto;
+  width:58.333%;
+}
+
+.Col8{
+  flex:0 0 auto;
+  width:66.6666%;
+}
+
+.Col12{
+  flex:0 0 auto;
+  width:100%;
+}
+
+.Thumbnail {
+  width:100%;
+
+}
+
+.Link {
+  text-decoration:none;
+}
+.Link:hover {
+  text-decoration:underline;
+}
+
+
+.GameCard {
+  /* Add shadows to create the "card" effect */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  margin:10px;
+  padding:10px;
+}
+
