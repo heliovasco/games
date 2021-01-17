@@ -1,7 +1,9 @@
-#Project Name & Pitch
+#Project: 
+
 App created to find & track the best free-to-play games!
 
-#Developed by
+#Developed by:
+
 Helio Lima
 
 #Installation and Setup Instructions
